@@ -1,0 +1,12 @@
+---
+- hosts: '{{ which_srv }}'
+  vars: 
+    user_web: user01
+  remote_user: root
+  vars_prompt:
+    - name: 'input_str'
+      prompt: 'Key pass '
+      private: yes
+  tasks:
+    - name: show input str
+      shell: echo {{ input_str }}
