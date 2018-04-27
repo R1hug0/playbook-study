@@ -1,0 +1,10 @@
+---
+- hosts: 'which_srv'
+  vars: 
+    user_web: user01
+  remote_user: root
+  tasks:
+    - name:  ping target host
+      ping: 
+
+    
