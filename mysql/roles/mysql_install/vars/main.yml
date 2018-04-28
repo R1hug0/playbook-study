@@ -1,0 +1,13 @@
+mysql_makedir: /usr/local/src
+mysql_basedir: /usr/local/mysql
+mysql_datadir: /data/mysql
+mysql_user: mysql
+mysql_conf: my.cnf
+mysql_database_user: root
+mysql_passwd: mysql2018
+mysql_port: 3306
+mysql_sock: /data/mysql/mysql.sock
+mysql_charset: utf8
+mysql_collation: utf8_general_ci
+mysql_version: mysql-5.6.37
+mysql_file: mysql-5.6.37.tar.gz

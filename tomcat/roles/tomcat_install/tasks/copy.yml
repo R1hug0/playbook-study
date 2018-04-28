@@ -1,0 +1,24 @@
+  - name: Copy Tomcat Software To Redhat Client
+    copy: src={{ tomcat_version }}.tar.gz  dest=/tmp/ owner=root group=root
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Create Tomcat User In Redhat Client
+    user: name={{ tomcat_user }} state=present createhome=no shell=/sbin/nologin
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6 and ansible_distribution_version|int >=6
+  - name: Copy Tomcat Start Script To Redhat Client
+    template: src=tomcat dest=/etc/init.d/tomcat owner=root group=root mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Tomcat Start File jsvc To Redhat Client
+    copy: src=jsvc dest=/tmp/jsvc owner=root group=root mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Install Tomcat Script  To Redhat Client
+    template: src=install_tomcat.sh dest=/tmp/ owner=root group=root mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Tomcat Config To Redhat Client
+    template: src=server.xml dest=/tmp  owner=root group=root mode=0644
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Tomcat check Script To Redhat Client
+    template: src=tomcat_check.sh dest=/tmp/tomcat_check.sh owner=root group=root mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Tomcat env Script To Redhat Client
+    template: src=setenv.sh dest=/tmp/setenv.sh owner=root group=root mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

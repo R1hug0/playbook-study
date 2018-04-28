@@ -1,0 +1,21 @@
+- name: Install initializtion require software
+  yum: name={{ item }} state=latest
+  with_items:
+    - gcc
+    - gcc-c++
+    - autoconf
+    - mod_ssl 
+    - mod_perl
+    - net-snmp-devel
+    - unixODBC-devel
+    - OpenIPMI-devel
+    - openldap
+    - openldap-devel
+    - libssh2-devel
+    - libxml2
+    - libxml2-devel
+    - libevent
+    - libevent-devel
+  notify:
+    - check time service
+    - correction time

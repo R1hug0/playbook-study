@@ -1,0 +1,4 @@
+---
+- name : check tomcat status
+  shell: /bin/sh /tmp/tomcat_check.sh
+

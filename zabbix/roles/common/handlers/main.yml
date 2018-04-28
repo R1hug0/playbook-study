@@ -1,0 +1,6 @@
+- name: check time service
+  yum: name=ntpd state=latest
+  when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+- name: correction time
+  service: name=ntpd  state=restart
+  when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

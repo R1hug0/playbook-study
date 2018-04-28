@@ -1,0 +1,24 @@
+  - name: Copy Zabbix Software To Redhat Client
+    copy: src={{ zabbix_version }}.tar.gz dest=/tmp/{{ zabbix_version }}.tar.gz owner=root group=root
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Create Zabbix User In Redhat Client
+    user: name={{ zabbix_user }} state=present createhome=no shell=/bin/bash
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Zabbix Start Script To Redhat Client
+    template: src=zabbix_server dest=/etc/init.d/zabbix_server owner=root group=root mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Install Zabbix Script  To Redhat Client
+    template: src=install_zabbix.sh dest=/tmp/ owner=root group=root mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Zabbix Config To Redhat Client
+    template: src=zabbix_server.conf dest=/tmp/ owner=root group=root mode=0644
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Create zabbix server frontend dir on Redhat Client
+    file: path={{ zabbix_frontenddir }} state=directory
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Zabbix check env To Redhat Client
+    template: src=zabbix_env.sh dest=/tmp/zabbix_env.sh owner=root group=root mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Zabbix check Script To Redhat Client
+    template: src=zabbix_check.sh dest=/tmp/zabbix_check.sh owner=root group=root mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

@@ -1,0 +1,12 @@
+  - name: Copy jdk Software To Redhat Client
+    copy: src={{ jdk_version }}.tar.gz dest=/tmp/{{ jdk_version }}.tar.gz owner=root group=root
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy ant Software To Redhat Client
+    copy: src={{ ant_version }}.tar.gz dest=/tmp/{{ ant_version }}.tar.gz owner=root group=root
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy maven Software To Redhat Client
+    copy: src={{ maven_version }}.tar.gz dest=/tmp/{{ maven_version }}.tar.gz owner=root group=root
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Create jdk env file In Redhat Client
+    template: src=java.sh dest=/etc/profile.d/java.sh mode=0755 
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6 and ansible_distribution_version|int >=6

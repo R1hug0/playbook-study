@@ -1,0 +1,3 @@
+  - name: Delete zookeeper compression Software In Redhat Client
+    shell: rm -f   /tmp/{{ zookeeper_version }}.tar.gz  /tmp/zookeeper_check.sh
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

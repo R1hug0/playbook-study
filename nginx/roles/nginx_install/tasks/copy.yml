@@ -1,0 +1,21 @@
+  - name: Copy Nginx Software To Redhat Client
+    copy: src={{ nginx_version }}.tar.gz dest=/tmp/{{ nginx_version }}.tar.gz owner=root group=root
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Create Nginx User In Redhat Client
+    user: name={{ nginx_user }} state=present createhome=no shell=/bin/bash
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6 and ansible_distribution_version|int >=6
+  - name: Copy Nginx Start Script To Redhat Client
+    template: src=nginx dest=/etc/init.d/nginx owner=root group=root mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Install Nginx Script  To Redhat Client
+    template: src=install_nginx.sh dest=/tmp/ owner=root group=root mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Nginx Config To Redhat Client
+    template: src=nginx.conf dest=/tmp/ owner=root group=root mode=0644
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy sql safe check  Config To Redhat Client
+    template: src=sql.conf dest=/tmp/ owner=root group=root mode=0644
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Nginx check Script To Redhat Client
+    template: src=nginx_check.sh dest=/tmp/nginx_check.sh owner=root group=root mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

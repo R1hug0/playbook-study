@@ -1,0 +1,14 @@
+  - name: Stop Nginx Service
+    shell: killall -9 nginx
+    ignore_errors: yes
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Nginx Boot Start Script
+    shell: chkconfig --del nginx
+    ignore_errors: yes
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Nginx Dir And Socket
+    file: path={{ nginx_basedir }} state=absent 
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Nginx Service Start Script
+    shell: rm -f /etc/init.d/nginx
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

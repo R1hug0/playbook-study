@@ -1,0 +1,15 @@
+  - name: Stop Php Service
+    shell: /etc/init.d/php-fpm stop 
+    ignore_errors: yes
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Php Boot Start Script
+    shell: chkconfig --del php-fpm
+    ignore_errors: yes
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Php Dir And Socket
+    file: path={{ php_basedir }} state=absent 
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Php Service Start Script
+    shell: rm -f /etc/init.d/php-fpm
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

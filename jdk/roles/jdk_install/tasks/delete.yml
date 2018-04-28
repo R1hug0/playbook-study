@@ -1,0 +1,3 @@
+  - name: Delete jdk compression Software In Redhat Client
+    shell: rm -f   /tmp/{{ jdk_version }}.tar.gz
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

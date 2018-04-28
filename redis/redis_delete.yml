@@ -1,0 +1,6 @@
+---
+- hosts: "mysql_db"
+  remote_user: "root"
+  gather_facts: True
+  roles:
+    - redis_delete

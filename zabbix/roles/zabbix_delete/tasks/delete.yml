@@ -1,0 +1,14 @@
+  - name: Stop Zabbix Service
+    shell: name=zabbix_server state=stop
+    ignore_errors: yes
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Zabbix Boot Start Script
+    shell: chkconfig --del zabbix_server
+    ignore_errors: yes
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Zabbix Dir And Socket
+    file: path={{ zabbix_basedir }} state=absent 
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Zabbix Service Start Script
+    shell: rm -f /etc/init.d/zabbix_server
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

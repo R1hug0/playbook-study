@@ -1,0 +1,7 @@
+- name: Install Epel Repo 
+  shell: rpm -ivh http://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+  ignore_errors: True
+- name: Install initializtion require software 
+  shell: yum install -y gcc gcc-c++  make zlib zlib-devel pcre pcre-devel  libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libxml2 libxml2-devel glibc \
+      glibc-devel glib2 glib2-devel bzip2 bzip2-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel openssl openssl-devel openldap \
+      openldap-devel nss_ldap openldap-clients openldap-servers  libmcrypt  libmcrypt-devel httpd-devel ntpdate

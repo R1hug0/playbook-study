@@ -1,0 +1,18 @@
+  - name: Stop Tomcat Service
+    shell: /etc/init.d/tomcat stop 
+    ignore_errors: yes
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Tomcat Boot Start Script
+    shell: chkconfig --del tomcat
+    ignore_errors: yes
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Tomcat Dir And Socket
+    file: path={{ tomcat_basedir }} state=absent 
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Tomcat User
+    shell: userdel -r {{ tomcat_user }}
+    ignore_errors: yes
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Tomcat Service Start Script
+    shell: rm -f /etc/init.d/tomcat
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

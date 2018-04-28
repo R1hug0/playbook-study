@@ -1,0 +1,25 @@
+  - name: Delete existed Zabbix Base Dir
+    file: dest={{ zabbix_basedir }} state=absent
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: check nginx mysql php application is or not
+    shell: /bin/sh /tmp/zabbix_env.sh
+    register: result
+  - name: Create Zabbix Base Dir
+    file: dest={{ zabbix_basedir }} state=directory
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6 and result.stdout.find('success') != -1 
+  - name: Uncompression Zabbix Software To Redhat Client
+    shell: tar zxf /tmp/{{ zabbix_version }}.tar.gz -C {{ zabbix_makedir }}
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Modify Zabbix Dir Permission In Redhat Client
+    file: path={{ item }} owner={{ zabbix_user }} group={{ zabbix_user }} mode=0755
+    with_items:
+      - "{{ zabbix_basedir }}"
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Install Zabbix Script In Redhat Client
+    shell: /bin/sh /tmp/install_zabbix.sh
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Add Boot Start Zabbix Service In Redhat Client
+    service: name=zabbix_server enabled=yes
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+    notify:
+    - check zabbix status

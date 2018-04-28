@@ -1,0 +1,21 @@
+  - name: Stop Mongodb Service
+    shell: /etc/init.d/mongod stop
+    ignore_errors: yes
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Mongodb Boot Start Script
+    shell: chkconfig --del mongod
+    ignore_errors: yes
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Mongodb Base Dir And Socket
+    file: path={{ mongodb_basedir }} state=absent 
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Mongodb Data Dir 
+    file: path={{ mongodb_datadir }} state=absent 
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Mongodb User
+    shell: userdel -r {{ mongodb_user }}
+    ignore_errors: yes
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Mongodb Service Start Script
+    shell: rm -f /etc/init.d/mongod
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

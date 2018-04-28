@@ -1,0 +1,5 @@
+zookeeper_basedir: /usr/local/zookeeper
+zookeeper_datadir: /usr/local/zookeeper/data/
+zookeeper_version: zookeeper-3.4.11
+zookeeper_confdir: /usr/local/zookeeper/conf/
+zookeeper_logdir: /usr/local/zookeeper/logs/ 

@@ -1,0 +1,2 @@
+zookeeper_basedir: /usr/local/zookeeper
+zookeeper_version: zookeeper-3.4.11

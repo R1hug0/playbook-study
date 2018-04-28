@@ -1,0 +1,17 @@
+  - name: Uncompression Zookeeper Software To Redhat Client
+    shell: tar zxf /tmp/{{ zookeeper_version }}.tar.gz -C /usr/local/
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: rename Zookeeper Software 
+    shell: mv /usr/local/{{ zookeeper_version }} /usr/local/zookeeper
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name:  mkdir data and conf dir
+    file: path={{ zookeeper_basedir }}/{{ item }} state=directory 
+    with_items:
+      - "data"
+      - "logs"
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: create zoo.cfg file 
+    template: src=zoo.cfg dest={{ zookeeper_confdir }}  owner=root group=root mode=0644
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+    notify:
+    - check zookeeper dir

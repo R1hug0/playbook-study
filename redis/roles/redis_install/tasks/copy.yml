@@ -1,0 +1,24 @@
+  - name: Copy Redis Software To Redhat Client
+    copy: src={{ redis_file }} dest=/tmp/{{ redis_file }} owner=root group=root
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Create Redis User In Redhat Client
+    user: name={{ redis_user }} state=present createhome=no shell=/sbin/nologin
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6 and ansible_distribution_version|int >=6
+  - name: Copy Redis port1 Start Script To Redhat Client
+    template: src=redis{{ redis_port1 }} dest=/etc/init.d/redis{{ redis_port1 }} owner=root group=root mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Redis port2 Start Script To Redhat Client
+    template: src=redis{{ redis_port2 }} dest=/etc/init.d/redis{{ redis_port2 }} owner=root group=root mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Install Redis Script  To Redhat Client
+    template: src=install_redis.sh dest=/tmp/ owner=root group=root mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Redis port1 Config To Redhat Client
+    template: src=redis{{ redis_port1 }}.conf dest=/tmp/ owner=root group=root mode=0644
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Redis port2 Config To Redhat Client
+    template: src=redis{{ redis_port2 }}.conf dest=/tmp/ owner=root group=root mode=0644
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Redis check Script To Redhat Client
+    template: src=redis_check.sh dest=/tmp/redis_check.sh owner=root group=root mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

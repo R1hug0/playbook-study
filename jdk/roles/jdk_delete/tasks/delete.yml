@@ -1,0 +1,6 @@
+  - name: Delete jdk Dir and env_java.sh 
+    file: path={{ jdk_basedir }}/{{ jdk_version }} state=absent 
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete jdk Dir and env_java.sh 
+    file: path=/etc/profile.d/java.sh state=absent 
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

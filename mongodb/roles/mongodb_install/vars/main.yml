@@ -1,0 +1,10 @@
+mongodb_basedir: /usr/local/mongodb/
+mongodb_confdir: /usr/local/mongodb/etc/
+mongodb_makedir: /usr/local/src/
+mongodb_logdir: /usr/local/mongodb/log/
+mongodb_datadir: /data/mongodb/
+mongodb_piddir: /usr/local/mongodb/
+mongodb_pidfile: /usr/local/mongodb/mongod.pid
+mongodb_user: mongod
+mongodb_group: mongod
+mongodb_version: mongodb-3.2.3

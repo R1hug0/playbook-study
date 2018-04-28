@@ -1,0 +1,8 @@
+---
+- hosts: "{{ which_srv }}"
+  remote_user: "root"
+  gather_facts: True
+#ignore_errors: True
+  roles:
+    - common
+    - zabbix_install

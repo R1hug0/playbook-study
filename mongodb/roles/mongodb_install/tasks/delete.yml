@@ -1,0 +1,3 @@
+  - name: Delete Mongodb compression Software In Redhat Client
+    shell: rm -rf   /tmp/mongod.conf  /tmp/{{ mongodb_version }}.tgz
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

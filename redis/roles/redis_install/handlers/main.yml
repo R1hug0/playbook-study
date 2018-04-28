@@ -1,0 +1,4 @@
+---
+- name : check redis status
+  shell: /bin/sh /tmp/redis_check.sh
+

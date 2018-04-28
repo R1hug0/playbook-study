@@ -1,0 +1,18 @@
+  - name: Copy Mongodb Software To Redhat Client
+    copy: src={{ mongodb_version }}.tgz dest=/tmp/{{ mongodb_version }}.tgz owner=root group=root
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Create Mongodb User In Redhat Client
+    user: name={{ mongodb_user }} state=present createhome=no shell=/sbin/nologin
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6 and ansible_distribution_version|int >=6
+  - name: Copy Mongodb Start Script To Redhat Client
+    template: src=mongod dest=/etc/init.d/mongod owner=root group=root mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Install Mongodb Script  To Redhat Client
+    template: src=install_mongodb.sh dest=/tmp/ owner=root group=root mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Mongodb Config To Redhat Client
+    template: src=mongod.conf dest=/tmp/ owner=root group=root mode=0644
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Mongodb check Script To Redhat Client
+    template: src=mongodb_check.sh dest=/tmp/mongodb_check.sh owner=root group=root mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

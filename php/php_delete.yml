@@ -1,0 +1,6 @@
+---
+- hosts: "tzjs"
+  remote_user: "root"
+  gather_facts: True
+  roles:
+    - php_delete

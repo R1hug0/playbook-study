@@ -1,0 +1,22 @@
+  - name: Delete existed Nginx Base Dir
+    file: dest={{ nginx_basedir }} state=absent
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Create Nginx Base Dir
+    file: dest={{ nginx_basedir }} state=directory
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Uncompression Nginx Software To Redhat Client
+    shell: tar zxf /tmp/{{ nginx_version }}.tar.gz -C {{ nginx_makedir }}
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Modify Nginx Dir Permission In Redhat Client
+    file: path={{ item }} owner={{ nginx_user }} group={{ nginx_user }} mode=0755
+    with_items:
+      - "{{ nginx_basedir }}"
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Install Nginx Script In Redhat Client
+    shell: /bin/sh /tmp/install_nginx.sh
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Add Boot Start Nginx Service In Redhat Client
+    shell: chkconfig --level 345 nginx on
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+    notify:
+    - check nginx status

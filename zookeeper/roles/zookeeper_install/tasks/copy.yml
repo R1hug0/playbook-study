@@ -1,0 +1,9 @@
+  - name: Copy zookeeper Software To Redhat Client
+    copy: src={{ zookeeper_version }}.tar.gz dest=/tmp/{{ zookeeper_version }}.tar.gz owner=root group=root
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy zookeeper conf file To Redhat Client
+    template: src=zoo.cfg dest=/tmp/zoo.cfg owner=root group=root  mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy zookeeper checkfile To Redhat Client
+    template: src=zookeeper_check.sh dest=/tmp/zookeeper_check.sh  owner=root group=root  mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

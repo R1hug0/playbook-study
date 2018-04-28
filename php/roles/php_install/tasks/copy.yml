@@ -1,0 +1,29 @@
+  - name: Copy Gcc 4.8.2 Software To Redhat Client
+    copy: src=gcc-4.8.2.tar.gz dest=/tmp/ owner=root group=root
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Openssl 1.0.2 Software To Redhat Client
+    copy: src=openssl-1.0.2g.tar.gz dest=/tmp/ owner=root group=root
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Php Software To Redhat Client
+    copy: src={{ php_version }}.tar.gz dest=/tmp/ owner=root group=root
+  - name: Create Php User In Redhat Client
+    user: name={{ php_user }} state=present createhome=no shell=/sbin/nologin
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6 
+  - name: Copy  Php Conf File php.ini  To Redhat Client
+    template: src=php.ini dest=/tmp/ owner=root group=root mode=0644
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Php Config www.conf To Redhat Client
+    template: src=www.conf dest=/tmp/ owner=root group=root mode=0644
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Php Config php-fpm To Redhat Client
+    template: src=php-fpm.conf dest=/tmp/ owner=root group=root mode=0644
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Install Php Script  To Redhat Client
+    template: src=install_php.sh dest=/tmp/ owner=root group=root mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy update Openssl Script To Redhat Client
+    template: src=updateopenssl.sh dest=/tmp/ owner=root group=root mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Copy Php check Script To Redhat Client
+    template: src=php_check.sh dest=/tmp/php_check.sh owner=root group=root mode=0755
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

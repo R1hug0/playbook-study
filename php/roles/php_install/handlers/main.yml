@@ -1,0 +1,6 @@
+---
+- name : update openssl to 1.02o
+  shell: /bin/sh /tmp/updateopenssl.sh
+- name : check php status
+  shell: /bin/sh /tmp/php_check.sh
+

@@ -1,0 +1,6 @@
+nginx_basedir: /usr/local/nginx/
+nginx_confdir: /usr/local/nginx/conf/
+nginx_makedir: /usr/local/src/
+nginx_user: user01
+nginx_group: user01
+nginx_version: nginx-1.14.0

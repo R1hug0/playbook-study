@@ -1,0 +1,3 @@
+  - name: Delete Php compression Software In Redhat Client
+    shell: rm -rf  {{ php_makedir }}{{ php_version }} /tmp/www.conf  /tmp/{{ php_version }}.tar.gz
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

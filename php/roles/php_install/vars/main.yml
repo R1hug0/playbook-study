@@ -1,0 +1,8 @@
+php_basedir: /usr/local/php/
+php_confdir: /usr/local/php/etc/
+php_makedir: /usr/local/src/
+php_user: user01
+php_group: user01 
+php_version: php-7.1.16
+openssl_version: openssl-1.0.2o
+apxs_dir: /usr/sbin/apxs

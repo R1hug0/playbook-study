@@ -1,0 +1,10 @@
+redis_basedir: /usr/local/redis/
+redis_confdir: /usr/local/redis/etc/conf/
+redis_makedir: /usr/local/src/
+redis_port1: 6379
+redis_port2: 6380
+redis_password: 123123
+redis_logdir: /usr/local/redis/log/ 
+redis_user: user01
+redis_group: user01
+redis_version: redis-4.0.9

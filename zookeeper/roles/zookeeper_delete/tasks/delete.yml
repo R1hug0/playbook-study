@@ -1,0 +1,6 @@
+  - name: Delete zookeeper Dir and env_java.sh 
+    file: path={{ zookeeper_basedir }}  state=absent 
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete zookeeper conf file
+    file: path=/tmp/zoo.cfg state=absent 
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

@@ -1,0 +1,7 @@
+zabbix_basedir: /usr/local/zabbix/
+zabbix_confdir: /usr/local/zabbix/etc/
+zabbix_frontenddir: /data/zabbix_frontend
+zabbix_makedir: /usr/local/src/
+zabbix_user: user01
+zabbix_group: user01
+zabbix_version: zabbix-3.0.15

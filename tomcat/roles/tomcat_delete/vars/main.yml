@@ -1,0 +1,5 @@
+tomcat_basedir: /usr/local/tomcat/
+tomcat_confdir: /usr/local/tomcat/conf/
+tomcat_user: user01
+tomcat_group: user01
+tomcat_version: apache-tomcat-7.0.82

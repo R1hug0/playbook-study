@@ -1,0 +1,11 @@
+  - name: Uncompression Jdk Software To Redhat Client
+    shell: tar zxf /tmp/{{ jdk_version }}.tar.gz -C {{ soft_basedir }}
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Uncompression ant Software To Redhat Client
+    shell: tar zxf /tmp/{{ ant_version }}.tar.gz -C {{ soft_basedir }}
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Uncompression maven Software To Redhat Client
+    shell: tar zxf /tmp/{{ maven_version }}.tar.gz -C {{ soft_basedir }}
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+    notify:
+    - check jdk dir

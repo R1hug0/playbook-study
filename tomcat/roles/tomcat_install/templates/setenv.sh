@@ -1,0 +1,1 @@
+JAVA_OPTS="-server -Xms1024m -Xmx1024m -Xmn512m -Xss1m -XX:PermSize=256M -XX:MaxNewSize=256m -XX:MaxPermSize=512m -XX:-DoEscapeAnalysis -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true -Djava.nio.channels.spi.SelectorProvider=sun.nio.ch.EPollSelectorProvider"

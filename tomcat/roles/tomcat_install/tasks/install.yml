@@ -1,0 +1,11 @@
+  - name: Delete existed Tomcat Base Dir
+    file: dest={{ tomcat_basedir }} state=absent
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Install Tomcat Script In Redhat Client
+    shell: /bin/sh /tmp/install_tomcat.sh
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Add Boot Start Tomcat Service In Redhat Client
+    shell: chkconfig --level 345 tomcat on
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+    notify:
+    - check tomcat status

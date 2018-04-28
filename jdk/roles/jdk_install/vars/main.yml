@@ -1,0 +1,6 @@
+soft_basedir: /usr/local/
+jdk_basedir: /usr/local/
+jdk_version: jdk1.7.0_80
+ant_version: ant
+maven_version: maven
+

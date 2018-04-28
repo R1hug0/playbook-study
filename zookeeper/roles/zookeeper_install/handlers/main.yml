@@ -1,0 +1,3 @@
+---
+- name : check zookeeper dir
+  shell: /bin/sh /tmp/zookeeper_check.sh

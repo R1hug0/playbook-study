@@ -1,0 +1,8 @@
+  - name: exec optimize script on Redhat Client
+    shell: /bin/sh /tmp/{{ optimize_name6 }}
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6 and ansible_distribution_version|int <7
+  - name: exec optimize script on Redhat Client
+    shell: /bin/sh /tmp/{{ optimize_name7 }}
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=7
+    notify:
+    - check os systcl dir

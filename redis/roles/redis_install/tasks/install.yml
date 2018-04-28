@@ -1,0 +1,34 @@
+  - name: Delete existed redis Base Dir
+    file: dest={{ redis_basedir }} state=absent
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Create redis Base Dir
+    file: dest={{ redis_basedir }} state=directory
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Create redis Conf Dir
+    file: dest={{ redis_confdir }} state=directory
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Create redis Data Dir
+    file: dest={{ redis_basedir }}data state=directory
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Create redis Log Dir
+    file: dest={{ redis_logdir }} state=directory
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Uncompression redis Software To Redhat Client
+    shell: tar zxf /tmp/{{ redis_version }}.tar.gz -C {{ redis_makedir }}
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Modify redis Dir Permission In Redhat Client
+    file: path={{ item }} owner={{ redis_user }} group={{ redis_user }} mode=0755
+    with_items:
+      - "{{ redis_basedir }}"
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Install redis Script In Redhat Client
+    shell: /bin/sh /tmp/install_redis.sh
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Add Boot Start redis Service In Redhat Client
+    shell: chkconfig --level 345 redis{{ item }} on
+    with_items:
+      - "{{ redis_port1 }}"
+      - "{{ redis_port2 }}"
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+    notify:
+    - check redis status

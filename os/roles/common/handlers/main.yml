@@ -1,0 +1,2 @@
+- name: check os path
+  shell: uname -ra

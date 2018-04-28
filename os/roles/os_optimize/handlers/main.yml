@@ -1,0 +1,4 @@
+---
+- name : check sysctl parameters
+  shell: sysctl -p
+

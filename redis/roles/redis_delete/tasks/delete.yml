@@ -1,0 +1,24 @@
+  - name: Stop Redis port1 Service
+    shell: /etc/init.d/redis{{ redis_port1 }} stop 
+    ignore_errors: yes
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Stop Redis port2 Service
+    shell: /etc/init.d/redis{{ redis_port2 }} stop 
+    ignore_errors: yes
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Redis Boot Start Script
+    shell: chkconfig --del redis{{ item }}
+    with_items:
+      - "{{ redis_port1 }}"
+      - "{{ redis_port2 }}"
+    ignore_errors: yes
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Redis Dir And Socket
+    file: path={{ redis_basedir }} state=absent 
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Redis Service Start Script
+    shell: rm -f /etc/init.d/redis{{ item }}
+    with_items:
+      - "{{ redis_port1 }}"
+      - "{{ redis_port2 }}"
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

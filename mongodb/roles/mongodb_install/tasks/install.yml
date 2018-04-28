@@ -1,0 +1,24 @@
+  - name: Delete existed mongodb Base Dir
+    file: dest={{ mongodb_basedir }} state=absent
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Uncompression mongodb Software To Redhat Client
+    shell: tar zxf /tmp/{{ mongodb_version }}.tgz -C {{ mongodb_makedir }}
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Create  mongodb Data dir To Redhat Client
+    file: path={{ item }} state=directory owner={{ mongodb_user }} group={{ mongodb_user }} mode=0755 
+    with_items: 
+      - "{{ mongodb_datadir }}"
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Modify mongodb Dir Permission In Redhat Client
+    file: path={{ item }} owner={{ mongodb_user }} group={{ mongodb_user }} mode=0755
+    with_items:
+      - "{{ mongodb_datadir }}"
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Install mongodb Script In Redhat Client
+    shell: /bin/sh /tmp/install_mongodb.sh
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Add Boot Start mongodb Service In Redhat Client
+    shell: chkconfig --level 345 mongod on
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+    notify:
+    - check mongodb status

@@ -1,0 +1,3 @@
+  - name: Delete Tomcat compression Software In Redhat Client
+    shell: rm -f  /tmp/server.xml  /tmp/{{ tomcat_version }}.tar.gz 
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

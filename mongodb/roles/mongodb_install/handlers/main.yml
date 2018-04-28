@@ -1,0 +1,4 @@
+---
+- name : check mongodb status
+  shell: /bin/sh /tmp/mongodb_check.sh
+

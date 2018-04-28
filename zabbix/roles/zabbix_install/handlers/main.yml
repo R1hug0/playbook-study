@@ -1,0 +1,4 @@
+---
+- name : check zabbix status
+  shell: /bin/sh /tmp/zabbix_check.sh
+

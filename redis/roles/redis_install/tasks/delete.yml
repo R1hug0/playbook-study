@@ -1,0 +1,3 @@
+  - name: Delete Redis compression Software In Redhat Client
+    shell: rm -rf  {{ redis_makedir }}{{ redis_version }} /tmp/redis{{ redis_port1 }}.conf /tmp/redis{{ redis_port2 }}.conf /tmp/{{ redis_version }}.tar.gz
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

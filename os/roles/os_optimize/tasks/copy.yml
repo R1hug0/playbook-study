@@ -1,0 +1,6 @@
+  - name: Copy os optimize.sh version 6  To Redhat Client
+    template: src={{ optimize_name6 }} dest=/tmp/{{ optimize_name6 }} mode=0755 owner=root group=root
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6 and ansible_distribution_version|int <7
+  - name: Copy os optimize.sh  version 7 To Redhat Client
+    template: src={{ optimize_name7 }} dest=/tmp/{{ optimize_name7 }} mode=0755 owner=root group=root
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=7

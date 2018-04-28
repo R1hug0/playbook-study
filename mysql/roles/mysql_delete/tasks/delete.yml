@@ -1,0 +1,18 @@
+  - name: Stop Mysql Service
+    shell: /etc/init.d/mysqld stop
+    ignore_errors: yes
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Mysql Boot Start Script
+    shell: chkconfig --del mysqld
+    ignore_errors: yes
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Mysql Dir And Socket
+    shell: rm -rf {{ mysql_basedir }} {{ mysql_datadir }} /tmp/mysql.sock 
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Mysql User
+    user: name=mysql state=absent
+    ignore_errors: yes
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Delete Mysql Service Start Script
+    shell: rm -f /etc/init.d/mysqld
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6

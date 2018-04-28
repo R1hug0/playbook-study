@@ -1,0 +1,4 @@
+---
+- name : check mysql status
+  shell: /bin/sh /tmp/mysql_check.sh
+

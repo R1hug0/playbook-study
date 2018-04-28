@@ -1,0 +1,2 @@
+- name: Install initializtion require software
+  shell: yum install -y gcc-c++ pcre-devel zlib-devel cmake openssl-devel  bzip2-devel openssl libxml2-devel pcre gd gd-devel phpize libjpeg  libcurl-devel  

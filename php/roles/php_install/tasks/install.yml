@@ -1,0 +1,26 @@
+  - name: Delete existed php Base Dir
+    file: dest={{ php_basedir }} state=absent
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Create php Base Dir
+    file: dest={{ php_basedir }} state=directory
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Uncompression Gcc4.8 Software To Redhat Client
+    shell: tar zxf /tmp/gcc-4.8.2.tar.gz -C {{ php_makedir }}
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Uncompression php Software To Redhat Client
+    shell: tar zxf /tmp/{{ php_version }}.tar.gz -C {{ php_makedir }}
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Modify php Dir Permission In Redhat Client
+    file: path={{ item }} owner={{ php_user }} group={{ php_user }} mode=0755
+    with_items:
+      - "{{ php_basedir }}"
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Exec Install php Script In Redhat Client
+    shell: /bin/sh /tmp/install_php.sh
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+  - name: Add Boot Start php Service In Redhat Client
+    shell: chkconfig --level 345 php-fpm on
+    when: ansible_os_family == "RedHat" and ansible_distribution_version|int >=6
+    notify:
+    - update openssl to 1.02o
+    - check php status

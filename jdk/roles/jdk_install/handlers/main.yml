@@ -1,0 +1,4 @@
+---
+- name : check jdk dir
+  shell: ls {{ jdk_basedir }}
+

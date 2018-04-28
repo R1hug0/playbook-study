@@ -1,0 +1,4 @@
+---
+- name : check nginx status
+  shell: /bin/sh /tmp/nginx_check.sh
+
